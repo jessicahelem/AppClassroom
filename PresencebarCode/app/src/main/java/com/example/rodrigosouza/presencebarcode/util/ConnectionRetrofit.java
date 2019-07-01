@@ -15,4 +15,5 @@ public class ConnectionRetrofit {
     public DeclaracaoAusenciaService service(){
         return this.retrofit.create(DeclaracaoAusenciaService.class);
     }
+
 }

@@ -3,34 +3,38 @@ package com.example.rodrigosouza.presencebarcode.model;
 import java.util.Date;
 
 public class DeclaracaoInteresse {
-    private long cod ;
-    private Professor professor;
-    private Date dateDeclaracao;
+    //private long cod ;
+    private String declarador;
+    private String data_declaracao;
     public DeclaracaoInteresse(){
 
     }
+    public DeclaracaoInteresse(String declarador, String data_declaracao){
+        this.declarador = declarador;
+        this.data_declaracao = data_declaracao;
+    }
 
-    public long getCod() {
+    /*public long getCod() {
         return cod;
     }
 
     public void setCod(long cod) {
         this.cod = cod;
+    }*/
+
+    public String getDeclarador() {
+        return declarador;
     }
 
-    public Professor getProfessor() {
-        return professor;
+    public void setDeclarador(String professor) {
+        this.declarador = professor;
     }
 
-    public void setProfessor(Professor professor) {
-        this.professor = professor;
+    public String getData_declaracao() {
+        return data_declaracao;
     }
 
-    public Date getDateDeclaracao() {
-        return dateDeclaracao;
-    }
-
-    public void setDateDeclaracao(Date dateDeclaracao) {
-        this.dateDeclaracao = dateDeclaracao;
+    public void setData_declaracao(String dataDeclaracao) {
+        this.data_declaracao = dataDeclaracao;
     }
 }

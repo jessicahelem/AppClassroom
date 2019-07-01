@@ -12,12 +12,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <!--TextView
+            <TextView
                 android:id="@+id/tv_cod"
                 android:layout_width="1in"
                 android:layout_height="wrap_content"
                 android:text="00:00:00"/>
-            <TextView
+            <!--TextView
                 android:id="@+id/tv_justificativa"
                 android:layout_width="1in"
                 android:layout_height="wrap_content"
@@ -57,7 +57,8 @@
             android:id="@+id/bt_solicitar_horario"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/solicitar_horario"/>
+            android:text="@string/solicitar_horario"
+           />
     </LinearLayout>
 
 </LinearLayout>
