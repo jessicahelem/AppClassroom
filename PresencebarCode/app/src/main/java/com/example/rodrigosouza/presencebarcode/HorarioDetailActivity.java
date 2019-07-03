@@ -129,5 +129,16 @@ public class HorarioDetailActivity extends AppCompatActivity {
         curso = findViewById(R.id.txt_title_detail);
         cargaHo = findViewById(R.id.txt_carga_horaria);
         getTurma(turma);
+    
+    private void bindView(){
+        Intent intent = getIntent();
+        String ano =  intent.getStringExtra("year");
+        String mes =  intent.getStringExtra("month");
+        String dia =  intent.getStringExtra("dayOfMonth");
+        disp = (Button) findViewById(R.id.bt_disponibilizar);
+        cancel = (Button)findViewById(R.id.bt_cancelar);
+        disponivel = (TextView)findViewById(R.id.txt_disponivel);
+        data = (TextView)findViewById(R.id.txt_data);
+        data.setText(dia+"/"+mes+"/"+ano);
     }
 }
