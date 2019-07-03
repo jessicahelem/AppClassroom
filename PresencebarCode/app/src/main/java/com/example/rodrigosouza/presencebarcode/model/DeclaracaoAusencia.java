@@ -9,8 +9,8 @@ public class DeclaracaoAusencia {
     private String justificativa;
     private String professor;
     private String turma;
-    private Date data_falta;
-    private Date data_declaracao;
+    private String data_falta;
+    private String data_declaracao;
     private String horario;
     public DeclaracaoAusencia(){
 
@@ -48,19 +48,19 @@ public class DeclaracaoAusencia {
         this.turma = turma;
     }
 
-    public Date getData_falta() {
+    public String getData_falta() {
         return data_falta;
     }
 
-    public void setData_falta(Date dataFalta) {
+    public void setData_falta(String dataFalta) {
         this.data_falta = dataFalta;
     }
 
-    public Date getData_declaracao() {
+    public String getData_declaracao() {
         return data_declaracao;
     }
 
-    public void setData_declaracao(Date dataDeclaracao) {
+    public void setData_declaracao(String dataDeclaracao) {
         this.data_declaracao = dataDeclaracao;
     }
 

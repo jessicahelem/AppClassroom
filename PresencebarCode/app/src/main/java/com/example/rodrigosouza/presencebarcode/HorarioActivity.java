@@ -7,6 +7,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.CalendarView;
 
+import java.util.Calendar;
+
 public class HorarioActivity extends AppCompatActivity {
     private int year, month, day, hour, minute;
     CalendarView calendar;
@@ -23,10 +25,14 @@ public class HorarioActivity extends AppCompatActivity {
         });
     }
     private void goDetail(int year, int month, int dayOfMonth){
-        Intent intent = new Intent(this, HorarioDisponivelActivity.class);
+        Intent intent = new Intent(this, ProfessorHorarioActivity.class);
         intent.putExtra("year",""+year);
         intent.putExtra("month",""+month);
         intent.putExtra("dayOfMonth",""+dayOfMonth);
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month, dayOfMonth);
+        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+        intent.putExtra("dayOfWeek",""+dayOfWeek);
         startActivity(intent);
     }
     @Override

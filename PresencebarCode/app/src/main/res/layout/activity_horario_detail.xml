@@ -11,7 +11,7 @@
         android:id="@+id/txt_title_detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Title"
+        android:text="Detalhes Horário"
         android:layout_gravity="center"
         />
     <LinearLayout
@@ -32,11 +32,11 @@
             android:layout_marginLeft="14sp"
             android:text="Disciplina"/>
         <TextView
-            android:id="@+id/txt_data"
+            android:id="@+id/txt_turma"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="14sp"
-            android:text="Data"/>
+            android:text="Turma"/>
     </LinearLayout>
     <View
         android:layout_width="wrap_content"
@@ -53,11 +53,17 @@
             android:layout_marginLeft="14sp"
             android:text="Carga Horaria"/>
         <TextView
-            android:id="@+id/txt_carga_horaria_cumprida"
+            android:id="@+id/txt_horario_hora_inicio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="14sp"
-            android:text="Carga Horaria Cumprida"/>
+            android:text="00:00:00"/>
+        <TextView
+        android:id="@+id/txt_horario_hora_fim"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="14sp"
+        android:text="00:00:00"/>
 
     </LinearLayout>
     <View
@@ -68,7 +74,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         >
-        <TextView
+        <!--TextView
             android:id="@+id/txt_horas_falta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -79,7 +85,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="14sp"
-            android:text="Horario Ativo"/>
+            android:text="Horario Ativo"/-->
 
     </LinearLayout>
     <View
@@ -98,6 +104,13 @@
         android:layout_height="wrap_content"
         android:text="Cancelar"
         android:onClick="cancelarDispon"
+        android:visibility="invisible"/>
+    <Button
+        android:id="@+id/bt_detail_solicitar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Solicitar Horario"
+        android:onClick="SolicitarHorario"
         android:visibility="invisible"/>
 
 </LinearLayout>

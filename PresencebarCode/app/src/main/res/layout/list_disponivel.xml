@@ -57,7 +57,8 @@
             android:id="@+id/bt_solicitar_horario"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/solicitar_horario"/>
+            android:text="@string/solicitar_horario"
+           />
     </LinearLayout>
 
 </LinearLayout>
