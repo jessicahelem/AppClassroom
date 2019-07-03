@@ -61,8 +61,8 @@ public class DeclaracaoAusenciaAdapter  extends BaseAdapter {
         turma.setText(ausencia.getTurma());
         TextView horario = (TextView)view.findViewById(R.id.tv_horario);
         horario.setText(ausencia.getHorario());
-        final TextView cod = (TextView)view.findViewById(R.id.tv_cod);
-        cod.setText(""+ausencia.getCod());
+        //final TextView cod = (TextView)view.findViewById(R.id.tv_cod);
+        //cod.setText(""+ausencia.getCod());
         //TextView justi = (TextView)view.findViewById(R.id.tv_justificativa);
         //justi.setText(ausencia.getJustificativa());
         Button solicitar = (Button)view.findViewById(R.id.bt_solicitar_horario);

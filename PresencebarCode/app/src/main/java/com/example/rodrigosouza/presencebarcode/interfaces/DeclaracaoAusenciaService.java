@@ -16,4 +16,7 @@ public interface DeclaracaoAusenciaService {
 
     @POST("declaracoes-interesses/")
     Call<DeclaracaoInteresse> declararInteresse(@Body DeclaracaoInteresse interesse);
+
+    @POST("declaracoes-ausencias/")
+    Call<DeclaracaoAusencia> declararAusencia(@Body DeclaracaoAusencia ausencia);
 }
