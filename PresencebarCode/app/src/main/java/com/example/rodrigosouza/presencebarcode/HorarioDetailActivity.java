@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -26,44 +27,47 @@ public class HorarioDetailActivity extends AppCompatActivity {
     private Button cancel, solicitar;
     private TextView hoIni, hoFim, tur,curso;
     private TextView prof, discp, cargaHo;
-    private final String professorLogado = "1";
-    private String date, horaInicio;
+    private final String professorLogado = "4";
+    private String date, horaInicio, ministrante, turma, idHorario;
     private Turma turmaRes;
-    private Context context;
+    private final Context context=this;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_horario_detail);
-        context = this.context;
         bindView();
     }
     public void disponiblizar(View v){
         DeclaracaoAusencia ausencia = new DeclaracaoAusencia();
         ausencia.setData_falta(date);
-        ausencia.setProfessor("58912698");
-        ausencia.setTurma(turmaRes.getEspecificacao_disciplina());
-        ausencia.setHorario(horaInicio);
+        ausencia.setJustificativa("Pessoal");
+        ausencia.setProfessor(professorLogado);
+        ausencia.setTurma(turma);
+        ausencia.setHorario(idHorario);
         SimpleDateFormat fDate = new SimpleDateFormat("yyyy-MM-dd");
         Date hoje = new Date();
-        String Sdata = fDate.format(hoje);
-        ausencia.setData_declaracao(Sdata);
+        String sData = fDate.format(hoje);
+        ausencia.setData_declaracao(sData);
         Call<DeclaracaoAusencia> ausenciaCall = new ConnectionRetrofit().service().declararAusencia(ausencia);
         ausenciaCall.enqueue(new Callback<DeclaracaoAusencia>() {
             @Override
             public void onResponse(Call<DeclaracaoAusencia> call, Response<DeclaracaoAusencia> response) {
                 if(response.body() != null){
+                    // Log.i("MyLOG", "DecAuse response: "+response.body().toString());
                     Toast.makeText(context, "O horário foi disponibilizado para outros professores!", Toast.LENGTH_SHORT).show();
+                }else{
+                    //Log.i("MyLOG", "Eita Porra!");
                 }
             }
 
             @Override
             public void onFailure(Call<DeclaracaoAusencia> call, Throwable t) {
-
+                Log.i("MyLOG", "Error decAuse: "+t.toString());
             }
         });
 
         disp.setVisibility(View.GONE);
-        cancel.setVisibility(View.VISIBLE);
+        //cancel.setVisibility(View.VISIBLE);
 
     }
     public void SolicitarHorario(View v){
@@ -71,8 +75,9 @@ public class HorarioDetailActivity extends AppCompatActivity {
         cancel.setVisibility(View.VISIBLE);
     }
     public void cancelarDispon(View v){
+        // Call<DeclaracaoAusencia> deleteDec = new ConnectionRetrofit().service().deleteDeclaracao()
         Toast.makeText(this, "A ação foi cancelada!", Toast.LENGTH_SHORT).show();
-        if(professorLogado == "1"){
+        if(professorLogado.equals(ministrante)){
             disp.setVisibility(View.VISIBLE);
         }else{
             solicitar.setVisibility(View.VISIBLE);
@@ -96,18 +101,43 @@ public class HorarioDetailActivity extends AppCompatActivity {
         });
     }
 
+    public void verificarDisponibilidade(String idHorario){
+        Log.i("MyLOG","IdHorario do Verificar: "+idHorario);
+        Call<DeclaracaoAusencia> decAuseCall = new ConnectionRetrofit().service().verficaDeclaracaoAusencia(idHorario);
+        Log.i("MyLOG","Request verif: "+decAuseCall.request().toString());
+        decAuseCall.enqueue(new Callback<DeclaracaoAusencia>() {
+            @Override
+            public void onResponse(Call<DeclaracaoAusencia> call, Response<DeclaracaoAusencia> response) {
+                if(response.body() != null && !professorLogado.equals(ministrante)){
+                    Log.i("MyLOG","Response do Verificar: "+response.body().getJustificativa());
+                    solicitar.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DeclaracaoAusencia> call, Throwable t) {
+                Log.i("MyLOG","Error: "+t.toString());
+            }
+        });
+    }
+
     public void showData(Turma turma){
         tur.setText(turma.getEspecificacao_disciplina());
-        prof.setText(turma.getMinistrante());
+        ministrante = turma.getMinistrante();
+        prof.setText(ministrante);
         discp.setText(turma.getDisciplina());
         curso.setText(turma.getCurso());
         cargaHo.setText(turma.getCarga_horaria());
+        if(professorLogado.equals(ministrante)){
+            disp.setVisibility(View.VISIBLE);
+        }
     }
 
     public void bindView(){
         Intent intent = getIntent();
-        String id =  intent.getStringExtra("idHorario");
-        String turma =  intent.getStringExtra("turma");
+        idHorario =  intent.getStringExtra("idHorario");
+        verificarDisponibilidade(idHorario);
+        turma =  intent.getStringExtra("turma");
         horaInicio =  intent.getStringExtra("horaInicio");
         String horaFim =  intent.getStringExtra("horaFim");
         date =  intent.getStringExtra("date");
@@ -115,10 +145,7 @@ public class HorarioDetailActivity extends AppCompatActivity {
         disp = (Button) findViewById(R.id.bt_disponibilizar);
         cancel = (Button)findViewById(R.id.bt_cancelar);
         solicitar = findViewById(R.id.bt_detail_solicitar);
-        if(!professorLogado.equals("1")){
-            solicitar.setVisibility(View.VISIBLE);
-            disp.setVisibility(View.GONE);
-        }
+
         prof = (TextView)findViewById(R.id.txt_professor_nome);
         hoIni = findViewById(R.id.txt_horario_hora_inicio);
         hoIni.setText(horaInicio);
@@ -129,16 +156,5 @@ public class HorarioDetailActivity extends AppCompatActivity {
         curso = findViewById(R.id.txt_title_detail);
         cargaHo = findViewById(R.id.txt_carga_horaria);
         getTurma(turma);
-    
-    private void bindView(){
-        Intent intent = getIntent();
-        String ano =  intent.getStringExtra("year");
-        String mes =  intent.getStringExtra("month");
-        String dia =  intent.getStringExtra("dayOfMonth");
-        disp = (Button) findViewById(R.id.bt_disponibilizar);
-        cancel = (Button)findViewById(R.id.bt_cancelar);
-        disponivel = (TextView)findViewById(R.id.txt_disponivel);
-        data = (TextView)findViewById(R.id.txt_data);
-        data.setText(dia+"/"+mes+"/"+ano);
     }
 }

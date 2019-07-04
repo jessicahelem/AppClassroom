@@ -24,7 +24,7 @@
 	    <!--activity android:name=".HorarioActivity" /-->
         <!--android:name=".MainActivity"-->
         <activity
-            android:name=".HorarioActivity"
+            android:name=".MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

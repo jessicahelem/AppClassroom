@@ -74,7 +74,7 @@ public class DeclaracaoAusenciaAdapter  extends BaseAdapter {
                 Date hoje = new Date();
                 Log.i("MyLOG", hoje.toString());
 
-                createInteresse(professorLogado, formatDate(hoje));
+                createInteresse("548512", formatDate(hoje));
             }
         });
         return view;

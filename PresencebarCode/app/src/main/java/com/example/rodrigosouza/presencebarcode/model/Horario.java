@@ -2,7 +2,7 @@ package com.example.rodrigosouza.presencebarcode.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@JsonIgnoreProperties({"id"})
+//@JsonIgnoreProperties({"id"})
 public class Horario {
     private String id;
     private String dia_semana;
