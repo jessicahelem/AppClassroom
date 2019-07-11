@@ -9,4 +9,8 @@
         android:title="@string/hr_list"
         android:orderInCategory="100"
         app:showAsAction="never" />
+    <item android:id="@id/main_turmas"
+        android:title="turmas"
+        android:orderInCategory="100"
+        app:showAsAction="never"/>
 </menu>

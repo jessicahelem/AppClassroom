@@ -18,11 +18,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ProfessorHorarioActivity"></activity>
+        <activity android:name=".DetalhesCargaHorariaActivity"></activity>
+        <activity android:name=".ListaDeTurmaActivity" />
+        <activity android:name=".ProfessorHorarioActivity" />
         <activity android:name=".HorarioDisponivelActivity" />
         <activity android:name=".HorarioDetailActivity" />
-	    <!--activity android:name=".HorarioActivity" /-->
-        <!--android:name=".MainActivity"-->
+        <activity android:name=".HorarioActivity" />
+        <!-- android:name=".MainActivity" -->
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait">

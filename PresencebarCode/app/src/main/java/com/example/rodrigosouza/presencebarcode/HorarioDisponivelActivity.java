@@ -10,6 +10,7 @@ import com.example.rodrigosouza.presencebarcode.adapters.DeclaracaoAusenciaAdapt
 import com.example.rodrigosouza.presencebarcode.model.DeclaracaoAusencia;
 import com.example.rodrigosouza.presencebarcode.util.ConnectionRetrofit;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,9 +38,17 @@ public class HorarioDisponivelActivity extends AppCompatActivity {
         ausenciaCall.enqueue(new Callback<List<DeclaracaoAusencia>>() {
             @Override
             public void onResponse(Call<List<DeclaracaoAusencia>> call, Response<List<DeclaracaoAusencia>> response) {
-                Log.i("MyLOG",response.body().toString());
+                //Log.i("MyLOG",response.body().toString());
                 //ausencias = response.body();
-                populateListView(response.body());
+                if (response.isSuccessful()){
+                    populateListView(response.body());
+                }else {
+                    try {
+                        Log.i("MyLOG",response.errorBody().string().toString());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
 
             }
             @Override

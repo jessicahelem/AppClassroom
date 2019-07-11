@@ -202,6 +202,12 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
             startActivity(intent);
             return true;
         }
+        if(id == R.id.main_turmas){
+            Intent intent = new Intent(this,ListaDeTurmaActivity.class);
+            startActivity(intent);
+            return true;
+
+        }
         return super.onOptionsItemSelected(item);
     }
 
